@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "303037056950",
+    "project_id": "draw-flutter",
+    "storage_bucket": "draw-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303037056950:android:b838b31b77d940b9cf6317",
+        "android_client_info": {
+          "package_name": "com.example.draw_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303037056950-tah55n11j9q05uov3eduhmcvin7jjg2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ1f9PVf-pBZunsV3Vo9sSTRfQ9rSHQRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303037056950-tah55n11j9q05uov3eduhmcvin7jjg2i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "303037056950-juh2d9et3mru4dj9i230ms4sgaee4esn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.drawApp.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
