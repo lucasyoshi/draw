@@ -7,9 +7,23 @@ const ColorScheme lightColorScheme = ColorScheme(
   background: Color(0xFFF5F5F5),
   error: Colors.red,
   onPrimary: Color(0xFF000000),
-  onSecondary: Color(0xFFFFFFFF),
+  onSecondary: Color(0xFFE965BB),
   onSurface: Color(0xFFFFFFFF),
   onBackground: Color(0xFFF5F5F5),
   onError: Colors.white,
   brightness: Brightness.light,
+);
+
+const ColorScheme darkColorScheme = ColorScheme(
+  primary: Color(0xFF2B323D),
+  secondary: Color(0xFFF5F5F5),
+  surface: Color(0xFFF5F5F5),
+  background: Color(0xFF2B323D),
+  error: Colors.red,
+  onPrimary: Color(0xFFFFFFFF),
+  onSecondary: Color(0xFFE965BB),
+  onSurface: Color(0xFF000000),
+  onBackground: Color(0xFF2B323D),
+  onError: Colors.white,
+  brightness: Brightness.dark,
 );

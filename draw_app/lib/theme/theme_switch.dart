@@ -13,7 +13,7 @@ class _ThemeSwitchState extends State<ThemeSwitch> {
       MaterialStateProperty.resolveWith<Icon?>(
     (Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
-        return const Icon(Icons.dark_mode);
+        return const Icon(Icons.dark_mode, color: Colors.black);
       }
       return const Icon(Icons.light_mode);
     },

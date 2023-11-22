@@ -1,4 +1,5 @@
 import 'package:draw_app/theme/theme_switch.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:draw_app/views/home.dart';
 import 'package:draw_app/views/signup.dart';
@@ -15,11 +16,24 @@ class Login extends StatelessWidget {
 
   Future<void> _handleSignIn(BuildContext context) async {
     try {
-      await _googleSignIn.signIn();
-      // Navigate to the Home page after successful sign in
-
+      GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       bool isSignedIn = await _googleSignIn.isSignedIn();
-      if (isSignedIn) {
+      if (isSignedIn && googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        await Auth().createUserWithGoogle(
+          googleUser.displayName ?? '',
+          googleUser.email,
+          googleUser.id,
+          true, // signedInWithGoogle is set to true
+        );
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
@@ -46,15 +60,26 @@ class Login extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    Text(
+                      'Log In',
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          fontWeight: FontWeight.bold, letterSpacing: 1),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
                     TextFormField(
-                      decoration: const InputDecoration(hintText: "Email"),
+                      decoration: const InputDecoration(
+                          labelText: "Email", hintText: "Email"),
                       controller: emailController,
+                      cursorColor: Theme.of(context).colorScheme.secondary,
                     ),
                     const SizedBox(
                       height: 40,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                        labelText: "Password",
                         hintText: "Password",
                         border: OutlineInputBorder(
                           borderRadius:
@@ -62,6 +87,7 @@ class Login extends StatelessWidget {
                         ),
                       ),
                       controller: passwordController,
+                      cursorColor: Theme.of(context).colorScheme.secondary,
                       obscureText: true,
                     ),
                     Container(

@@ -10,6 +10,7 @@ class Database {
       await db.collection("users").doc(user.id).set({
         "name": user.name,
         "email": user.email,
+        "signedInWithGoogle": user.signedInWithGoogle,
       });
       return true;
     } catch (e) {

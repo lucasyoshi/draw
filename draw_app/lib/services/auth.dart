@@ -17,7 +17,7 @@ class Auth {
     });
   }
 
-  Future<bool> createUser(String name, String email, String password) async {
+  Future<bool> createUser(String name, String email, String password, bool signedInWithGoogle) async {
     try {
       auth.UserCredential credential =
           await authInst.createUserWithEmailAndPassword(
@@ -27,6 +27,7 @@ class Auth {
         id: credential.user!.uid,
         name: name,
         email: credential.user!.email,
+        signedInWithGoogle: signedInWithGoogle
       );
       await Database().createNewUser(userModel);
       return true;
@@ -35,6 +36,22 @@ class Auth {
       return false;
     }
   }
+
+  Future<bool> createUserWithGoogle(String name, String email, String id, bool signedInWithGoogle) async {
+  try {
+    UserModel userModel = UserModel(
+      id: id,
+      name: name,
+      email: email,
+      signedInWithGoogle: signedInWithGoogle,
+    );
+    await Database().createNewUser(userModel);
+    return true;
+  } catch (e) {
+    print(e);
+    return false;
+  }
+}
 
   Future<bool> logIn(String email, String password) async {
     try {

@@ -30,22 +30,35 @@ class SignUp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text(
+                'Sign Up',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
               TextFormField(
-                decoration: const InputDecoration(hintText: "Full Name"),
+                decoration: const InputDecoration(
+                    labelText: "Full Name", hintText: "Full Name"),
                 controller: nameController,
               ),
               const SizedBox(
                 height: 40,
               ),
               TextFormField(
-                decoration: const InputDecoration(hintText: "Email"),
+                decoration: const InputDecoration(
+                    labelText: "Email", hintText: "Email"),
                 controller: emailController,
               ),
               const SizedBox(
                 height: 40,
               ),
               TextFormField(
-                decoration: const InputDecoration(hintText: "Password"),
+                decoration: const InputDecoration(
+                    labelText: "Password", hintText: "Password"),
                 obscureText: true,
                 controller: passwordController,
               ),
@@ -56,7 +69,7 @@ class SignUp extends StatelessWidget {
                     child: const Text("Sign Up"),
                     onPressed: () async {
                       bool status = await auth.createUser(nameController.text,
-                          emailController.text, passwordController.text);
+                          emailController.text, passwordController.text, false);
                       if (status) {
                         Navigator.pushReplacement(
                           context,
