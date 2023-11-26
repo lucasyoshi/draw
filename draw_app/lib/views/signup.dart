@@ -15,8 +15,8 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     print('SignUp build');
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF5F5F5),
         actions: const <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 10.0),
@@ -44,6 +44,7 @@ class SignUp extends StatelessWidget {
                 decoration: const InputDecoration(
                     labelText: "Full Name", hintText: "Full Name"),
                 controller: nameController,
+                cursorColor: Theme.of(context).colorScheme.secondary,
               ),
               const SizedBox(
                 height: 40,
@@ -52,6 +53,7 @@ class SignUp extends StatelessWidget {
                 decoration: const InputDecoration(
                     labelText: "Email", hintText: "Email"),
                 controller: emailController,
+                cursorColor: Theme.of(context).colorScheme.secondary,
               ),
               const SizedBox(
                 height: 40,
@@ -61,11 +63,19 @@ class SignUp extends StatelessWidget {
                     labelText: "Password", hintText: "Password"),
                 obscureText: true,
                 controller: passwordController,
+                cursorColor: Theme.of(context).colorScheme.secondary,
               ),
               Container(
                   width: double.infinity,
-                  margin: const EdgeInsets.symmetric(vertical: 20.0),
+                  margin: const EdgeInsets.only(top: 40.0, bottom: 20.0),
                   child: TextButton(
+                    style: TextButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
                     child: const Text("Sign Up"),
                     onPressed: () async {
                       bool status = await auth.createUser(nameController.text,

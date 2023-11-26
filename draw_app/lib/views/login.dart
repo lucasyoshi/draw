@@ -92,8 +92,15 @@ class Login extends StatelessWidget {
                     ),
                     Container(
                       width: double.infinity,
-                      margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      margin: const EdgeInsets.only(top: 40.0, bottom: 20.0),
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                        ),
                         child: const Text("Log In"),
                         onPressed: () async {
                           bool status = await auth.logIn(
@@ -114,6 +121,13 @@ class Login extends StatelessWidget {
                         width: double.infinity,
                         margin: const EdgeInsets.only(bottom: 20.0),
                         child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                          ),
                           child: const Text("Sign Up"),
                           onPressed: () {
                             Navigator.push(
@@ -131,8 +145,6 @@ class Login extends StatelessWidget {
                         label: const Text('Sign in with Google'),
                         onPressed: () => _handleSignIn(context),
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: Colors.white,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),

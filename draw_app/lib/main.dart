@@ -2,6 +2,7 @@
 
 import 'package:draw_app/views/auth_gate.dart';
 import 'package:draw_app/theme/theme.dart';
+import 'package:draw_app/views/products_page.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -38,7 +39,8 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Draw',
       theme: Provider.of<ThemeNotifier>(context).currentTheme,
-      home: AuthGate(),
+      // home: AuthGate(),
+      home: const ProductsPage()
       // home: const MyHomePage(),
     );
   }

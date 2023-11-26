@@ -1,5 +1,7 @@
+import 'package:draw_app/theme/button.dart';
 import 'package:draw_app/theme/color_scheme.dart';
 import 'package:draw_app/theme/input_decoration.dart';
+import 'package:draw_app/theme/switch.dart';
 import 'package:draw_app/theme/text.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +15,11 @@ ThemeData buildLightTheme() {
     textTheme: lightText(lightBase.textTheme),
     // iconTheme: buildIconTheme(base.iconTheme),
     // appBarTheme: buildAppBarTheme(base.appBarTheme),
-    // textButtonTheme: buildTextButtonThemeData(base.textButtonTheme),
-    // outlinedButtonTheme: buildOutlinedButtonThemeData(base.outlinedButtonTheme),
-    // elevatedButtonTheme: buildElevatedButtonThemeData(base.elevatedButtonTheme),
+    textButtonTheme: buildTextButtonThemeData(lightBase.textButtonTheme, lightColorScheme),
+    outlinedButtonTheme: buildOutlinedButtonThemeData(lightBase.outlinedButtonTheme, lightColorScheme),
+    elevatedButtonTheme: buildElevatedButtonThemeData(lightBase.elevatedButtonTheme, lightColorScheme),
     // snackBarTheme: buildSnackBarTheme(base.snackBarTheme),
-    // switchTheme: buildSwitchTheme(base.switchTheme),
+    switchTheme: switchTheme(lightBase.switchTheme, lightColorScheme),
     // dialogTheme: buildDialogTheme(base.dialogTheme),
     // //inputDecorationTheme applies to TextField Widgets.
     inputDecorationTheme: lightInputDecoration(
@@ -33,11 +35,11 @@ ThemeData buildDarkTheme() {
     textTheme: darkText(darkBase.textTheme),
     // iconTheme: buildIconTheme(base.iconTheme),
     // appBarTheme: buildAppBarTheme(base.appBarTheme),
-    // textButtonTheme: buildTextButtonThemeData(base.textButtonTheme),
-    // outlinedButtonTheme: buildOutlinedButtonThemeData(base.outlinedButtonTheme),
-    // elevatedButtonTheme: buildElevatedButtonThemeData(base.elevatedButtonTheme),
+    textButtonTheme: buildTextButtonThemeData(darkBase.textButtonTheme, darkColorScheme),
+    outlinedButtonTheme: buildOutlinedButtonThemeData(darkBase.outlinedButtonTheme, darkColorScheme),
+    elevatedButtonTheme: buildElevatedButtonThemeData(darkBase.elevatedButtonTheme, darkColorScheme),
     // snackBarTheme: buildSnackBarTheme(base.snackBarTheme),
-    // switchTheme: buildSwitchTheme(base.switchTheme),
+    switchTheme: switchTheme(darkBase.switchTheme, darkColorScheme),
     // dialogTheme: buildDialogTheme(base.dialogTheme),
     // //inputDecorationTheme applies to TextField Widgets.
     inputDecorationTheme:

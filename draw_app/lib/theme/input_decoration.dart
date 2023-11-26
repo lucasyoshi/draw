@@ -53,7 +53,7 @@ InputDecorationTheme darkInputDecoration(
 }
 
 OutlineInputBorder _buildBorderStyle(Color color,
-    {double width = 1.0, Radius borderRadius = const Radius.circular(10)}) {
+    {double width = 1.5, Radius borderRadius = const Radius.circular(10)}) {
   return OutlineInputBorder(
     borderRadius: BorderRadius.all(borderRadius),
     borderSide: BorderSide(
