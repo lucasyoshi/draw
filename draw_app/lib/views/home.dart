@@ -1,5 +1,6 @@
 import 'package:draw_app/services/auth.dart';
 import 'package:draw_app/views/login.dart';
+import 'package:draw_app/views/products_page.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -12,7 +13,7 @@ class HomeState extends State<Home> {
   final Auth auth = Auth();
   final TextEditingController textEditingController = TextEditingController();
 
-    Future<void> _handleSignOut() async {
+  Future<void> _handleSignOut() async {
     try {
       await auth.logOut();
       // Navigate back to the login page after successful sign out
@@ -28,6 +29,41 @@ class HomeState extends State<Home> {
     }
   }
 
+  int _selectedIndex = 0;
+  final PageController _pageController = PageController();
+
+  void _onItemTapped(int index) {
+    if (index == 0) {
+      // if the last item is tapped
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const ProductsPage()), // navigate to the Profile page
+      );
+    }
+    //     if (index == 1) { // if the last item is tapped
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => ShoppingCart()), // navigate to the Profile page
+    //   );
+    // }
+    // if (index == 2) {
+    //   // if the last item is tapped
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => Profile()), // navigate to the Profile page
+    //   );
+    // }
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     print('Home build:');
@@ -41,13 +77,49 @@ class HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text('user: $currentUserName'),
-         actions: <Widget>[
+        actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: _handleSignOut,
           ),
         ],
-      )
+      ),
+      body: currentUserName != null
+          ? PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              children: const <Widget>[
+                ProductsPage(),
+                // Add more pages here
+              ],
+            )
+          : Login(),
+      bottomNavigationBar: currentUserName != null
+          ? BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search),
+                  label: 'Dashboard',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart),
+                  label: 'Cart',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Profile',
+                ),
+                // Add more items here
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: Theme.of(context).colorScheme.secondary,
+              onTap: _onItemTapped,
+            )
+          : null,
     );
   }
 }

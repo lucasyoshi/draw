@@ -39,8 +39,8 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Draw',
       theme: Provider.of<ThemeNotifier>(context).currentTheme,
-      // home: AuthGate(),
-      home: const ProductsPage()
+      home: AuthGate(),
+      // home: const ProductsPage()
       // home: const MyHomePage(),
     );
   }

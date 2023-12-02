@@ -17,6 +17,16 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Theme.of(context)
+                .colorScheme
+                .onSecondary, // replace with your desired color
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         actions: const <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 10.0),

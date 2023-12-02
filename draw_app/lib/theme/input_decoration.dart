@@ -19,6 +19,7 @@ InputDecorationTheme lightInputDecoration(
     hintStyle: TextStyle(
       color: lightColorScheme.secondary, // Use color from color scheme
     ),
+    prefixIconColor: lightColorScheme.onSecondary,
     labelStyle: TextStyle(
         color: lightColorScheme.onPrimary, // Use color from color scheme
         fontSize: 16,
@@ -31,6 +32,7 @@ InputDecorationTheme darkInputDecoration(
     InputDecorationTheme original, TextTheme textTheme) {
   return original.copyWith(
     fillColor: darkColorScheme.primary,
+    filled: true,
     focusColor: darkColorScheme.onPrimary,
     contentPadding: const EdgeInsets.all(16),
     border: _buildBorderStyle(darkColorScheme.onPrimary),
@@ -44,6 +46,7 @@ InputDecorationTheme darkInputDecoration(
     hintStyle: TextStyle(
       color: darkColorScheme.secondary, // Use color from color scheme
     ),
+    prefixIconColor: darkColorScheme.onSecondary,
     labelStyle: TextStyle(
         color: darkColorScheme.onPrimary, // Use color from color scheme
         fontSize: 16,

@@ -1,4 +1,5 @@
 import 'package:draw_app/theme/button.dart';
+import 'package:draw_app/theme/card.dart';
 import 'package:draw_app/theme/color_scheme.dart';
 import 'package:draw_app/theme/input_decoration.dart';
 import 'package:draw_app/theme/switch.dart';
@@ -24,6 +25,7 @@ ThemeData buildLightTheme() {
     // //inputDecorationTheme applies to TextField Widgets.
     inputDecorationTheme: lightInputDecoration(
         lightBase.inputDecorationTheme, lightBase.textTheme),
+    cardTheme: buildCardTheme(lightBase.cardTheme, lightColorScheme),
     // //textSelectionTheme applies to the cursor of TextField Widgets.
     // textSelectionTheme: textSelectionThemeData(),
   );
@@ -44,6 +46,7 @@ ThemeData buildDarkTheme() {
     // //inputDecorationTheme applies to TextField Widgets.
     inputDecorationTheme:
         darkInputDecoration(darkBase.inputDecorationTheme, darkBase.textTheme),
+    cardTheme: buildCardTheme(darkBase.cardTheme, darkColorScheme),
     // //textSelectionTheme applies to the cursor of TextField Widgets.
     // textSelectionTheme: textSelectionThemeData(),
   );
