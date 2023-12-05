@@ -1,6 +1,8 @@
 import 'package:draw_app/services/auth.dart';
 import 'package:draw_app/views/login.dart';
 import 'package:draw_app/views/products_page.dart';
+import 'package:draw_app/views/profile.dart';
+import 'package:draw_app/views/shopping_cart.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -33,21 +35,21 @@ class HomeState extends State<Home> {
   final PageController _pageController = PageController();
 
   void _onItemTapped(int index) {
-    if (index == 0) {
-      // if the last item is tapped
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                const ProductsPage()), // navigate to the Profile page
-      );
-    }
-    //     if (index == 1) { // if the last item is tapped
+    // if (index == 0) {
+    //   // if the last item is tapped
     //   Navigator.push(
     //     context,
-    //     MaterialPageRoute(builder: (context) => ShoppingCart()), // navigate to the Profile page
+    //     MaterialPageRoute(
+    //         builder: (context) =>
+    //             const ProductsPage()), // navigate to the Profile page
     //   );
     // }
+    // //     if (index == 1) { // if the last item is tapped
+    // //   Navigator.push(
+    // //     context,
+    // //     MaterialPageRoute(builder: (context) => ShoppingCart()), // navigate to the Profile page
+    // //   );
+    // // }
     // if (index == 2) {
     //   // if the last item is tapped
     //   Navigator.push(
@@ -56,6 +58,7 @@ class HomeState extends State<Home> {
     //         builder: (context) => Profile()), // navigate to the Profile page
     //   );
     // }
+    _pageController.jumpToPage(index);
   }
 
   @override
@@ -92,8 +95,10 @@ class HomeState extends State<Home> {
                   _selectedIndex = index;
                 });
               },
-              children: const <Widget>[
-                ProductsPage(),
+              children: <Widget>[
+                const ProductsPage(),
+                const ShoppingCart(),
+                Profile(),
                 // Add more pages here
               ],
             )
@@ -116,7 +121,7 @@ class HomeState extends State<Home> {
                 // Add more items here
               ],
               currentIndex: _selectedIndex,
-              selectedItemColor: Theme.of(context).colorScheme.secondary,
+              selectedItemColor: Theme.of(context).colorScheme.onSecondary,
               onTap: _onItemTapped,
             )
           : null,

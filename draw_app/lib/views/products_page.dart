@@ -18,6 +18,7 @@ class ProductsPage extends StatefulWidget {
 class ProductsPageState extends State<ProductsPage> {
   List<Product> products = [];
   String search = '';
+  String filter = '';
   String? currentUserName;
   Future<List<Product>>? loadProductsFuture;
   final Auth auth = Auth();
@@ -83,7 +84,8 @@ class ProductsPageState extends State<ProductsPage> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.only(
+                top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
             child: Material(
               elevation: 3,
               shape: RoundedRectangleBorder(
@@ -103,6 +105,52 @@ class ProductsPageState extends State<ProductsPage> {
               ),
             ),
           ),
+          Padding(
+            padding:
+                const EdgeInsets.only(bottom: 20.0, left: 30.0, right: 30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filter = '1';
+                    });
+                  },
+                  child: const Text('Pen'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filter = '2';
+                    });
+                  },
+                  child: const Text('Pencil'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filter = '3';
+                    });
+                  },
+                  child: const Text('Notebook'),
+                ), // Add this line
+                FloatingActionButton(
+                  mini: true, // Set to true for a smaller button
+                  onPressed: () {
+                    setState(() {
+                      filter = '';
+                    });
+                  },
+                  shape: CircleBorder(
+                      side: BorderSide(
+                          color: Theme.of(context).colorScheme.secondary,
+                          width: 1.0)), // Add this line
+                  child: const Icon(Icons.close),
+                )
+              ],
+            ),
+          ),
           Expanded(
             child: FutureBuilder(
               future: loadProductsFuture,
@@ -115,7 +163,8 @@ class ProductsPageState extends State<ProductsPage> {
                   return Padding(
                     padding: const EdgeInsets.only(
                         left: 20, right: 20), // Add this line
-                    child: ProductGrid(products: products, search: search),
+                    child: ProductGrid(
+                        products: products, search: search, filter: filter),
                   );
                 }
               },

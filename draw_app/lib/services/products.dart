@@ -57,4 +57,37 @@ class Products {
       rethrow;
     }
   }
+
+  Future<bool> addToCart(String userId, String productId, int quantity) async {
+    print('Database addToCart: try');
+    try {
+      DocumentReference productRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("shopping_cart")
+          .doc(productId);
+
+      DocumentSnapshot productSnapshot = await productRef.get();
+
+      if (productSnapshot.exists) {
+        // If the product already exists in the cart, update the quantity
+        Map<String, dynamic> data =
+            productSnapshot.data() as Map<String, dynamic>;
+        await productRef.update({
+          "quantity": data['quantity'] + quantity,
+        });
+      } else {
+        // If the product does not exist in the cart, add it
+        await productRef.set({
+          "productId": productId,
+          "quantity": quantity,
+        });
+      }
+
+      return true;
+    } catch (e) {
+      print('Database addToCart: catch $e');
+      return false;
+    }
+  }
 }

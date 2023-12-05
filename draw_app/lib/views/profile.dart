@@ -13,11 +13,17 @@ class ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: Text(
+          'Profile',
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.background,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.logout),
+            color: Theme.of(context).colorScheme.secondary,
             onPressed: () async {
               await auth.signOut();
               // ignore: use_build_context_synchronously
