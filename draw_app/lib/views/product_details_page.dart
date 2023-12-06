@@ -149,7 +149,7 @@ class ProductDetailsPageState extends State<ProductDetailsPage> {
                               User? user = FirebaseAuth.instance.currentUser;
                               if (user != null) {
                                 bool success = await Products().addToCart(
-                                    user.uid, widget.product.id, quantity);
+                                    user.uid, widget.product, quantity);
                                 if (success) {
                                   // Show a success message
                                   // ignore: use_build_context_synchronously

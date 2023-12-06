@@ -78,15 +78,15 @@ class HomeState extends State<Home> {
         : auth.authInst.currentUser!.displayName);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('user: $currentUserName'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: _handleSignOut,
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: Text('user: $currentUserName'),
+      //   actions: <Widget>[
+      //     IconButton(
+      //       icon: const Icon(Icons.logout),
+      //       onPressed: _handleSignOut,
+      //     ),
+      //   ],
+      // ),
       body: currentUserName != null
           ? PageView(
               controller: _pageController,
@@ -105,6 +105,8 @@ class HomeState extends State<Home> {
           : Login(),
       bottomNavigationBar: currentUserName != null
           ? BottomNavigationBar(
+              backgroundColor: Theme.of(context).colorScheme.background,
+              unselectedItemColor: Theme.of(context).colorScheme.secondary,
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.search),

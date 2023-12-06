@@ -1,3 +1,4 @@
+import 'package:draw_app/views/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -27,7 +28,12 @@ class ProfileState extends State<Profile> {
             onPressed: () async {
               await auth.signOut();
               // ignore: use_build_context_synchronously
-              Navigator.of(context).pushReplacementNamed('/login');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Login(),
+                ),
+              );
             },
           ),
         ],

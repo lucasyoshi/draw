@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:draw_app/models/product.dart';
+import 'package:draw_app/models/shoppingCartItem.dart';
 
 class Products {
   final FirebaseFirestore db = FirebaseFirestore.instance;
@@ -58,14 +59,14 @@ class Products {
     }
   }
 
-  Future<bool> addToCart(String userId, String productId, int quantity) async {
+  Future<bool> addToCart(String userId, Product product, int quantity) async {
     print('Database addToCart: try');
     try {
       DocumentReference productRef = db
           .collection("users")
           .doc(userId)
           .collection("shopping_cart")
-          .doc(productId);
+          .doc(product.id);
 
       DocumentSnapshot productSnapshot = await productRef.get();
 
@@ -79,7 +80,19 @@ class Products {
       } else {
         // If the product does not exist in the cart, add it
         await productRef.set({
-          "productId": productId,
+          "product": {
+            "productId": product.id,
+            "name": product.name,
+            "description": product.description,
+            "price": product.price,
+            "image": product.image,
+            "colour": product.colour,
+            "size": product.size,
+            "type": product.type,
+            "brand": product.brand,
+            "categoryId": product.categoryId,
+            "quantityOnHand": product.quantityOnHand,
+          },
           "quantity": quantity,
         });
       }
@@ -88,6 +101,30 @@ class Products {
     } catch (e) {
       print('Database addToCart: catch $e');
       return false;
+    }
+  }
+
+  Future<List<ShoppingCartItem>> getAllShoppingCartItems(String userId) async {
+    print('Database getAllShoppingCartItems: try');
+    try {
+      QuerySnapshot querySnapshot = await db
+          .collection("users")
+          .doc(userId)
+          .collection("shopping_cart")
+          .get();
+      print('Database getAllShoppingCartItems: querySnapshot.docs.length = ' +
+          querySnapshot.docs.length.toString());
+      return querySnapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        print(data['product']);
+        Product product =
+            Product.fromJson(data['product'] as Map<String, dynamic>);
+        int quantity = data['quantity'];
+        return ShoppingCartItem(product: product, quantity: quantity);
+      }).toList();
+    } catch (e) {
+      print('Database getAllShoppingCartItems: catch $e');
+      rethrow;
     }
   }
 }

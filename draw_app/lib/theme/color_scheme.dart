@@ -9,7 +9,7 @@ const ColorScheme lightColorScheme = ColorScheme(
   onPrimary: Color(0xFF000000),
   onSecondary: Color(0xFFE965BB),
   onSurface: Color(0xFFFFFFFF),
-  onBackground: Color(0xFFFFFFFF    ),
+  onBackground: Color(0xFFFFFFFF),
   onError: Colors.white,
   brightness: Brightness.light,
 );

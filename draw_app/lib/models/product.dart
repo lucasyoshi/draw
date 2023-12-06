@@ -28,19 +28,20 @@ class Product {
   });
 
   Product.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    description = json['description'];
-    price = json['price'];
-    image = json['image'];
-    colour = json['colour'];
-    size = json['size'];
-    type = json['type'];
-    brand = json['brand'];
-    categoryId = json['categoryId'];
-    quantityOnHand = json['quantityOnHand'];
+    id = json['id'] ?? '';
+    name = json['name'] ?? '';
+    description = json['description'] ?? '';
+    price = json['price'] ?? 0.0;
+    image = json['image'] ?? '';
+    colour = json['colour'] ?? '';
+    size = json['size'] ?? '';
+    type = json['type'] ?? '';
+    brand = json['brand'] ?? '';
+    categoryId = json['categoryId'] ?? '';
+    quantityOnHand = json['quantityOnHand'] ?? '';
   }
-    factory Product.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
+  factory Product.fromDocumentSnapshot(
+      {required DocumentSnapshot documentSnapshot}) {
     Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
     return Product(
       id: documentSnapshot.id,
