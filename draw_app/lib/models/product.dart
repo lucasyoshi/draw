@@ -8,7 +8,7 @@ class Product {
   late String type;
   late String brand;
   late String categoryId;
-  late String quantityOnHand;
+  late int quantityOnHand;
   late String description;
   late double price;
   late String image;
@@ -47,14 +47,14 @@ class Product {
       id: documentSnapshot.id,
       name: data['name'],
       description: data['description'],
-      price: data['price'],
+      price: (data['price'] as num).toDouble(),
       image: data['image'],
       colour: data['colour'],
       size: data['size'],
       type: data['type'],
       brand: data['brand'],
       categoryId: data['categoryId'],
-      quantityOnHand: data['quantityOnHand'],
+      quantityOnHand: (data['quantityOnHand'] as num).toInt(),
     );
   }
 }

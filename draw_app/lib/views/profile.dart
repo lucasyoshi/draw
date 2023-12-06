@@ -1,7 +1,11 @@
+import 'package:draw_app/models/order.dart';
+import 'package:draw_app/services/database.dart';
+import 'package:draw_app/services/orders.dart';
 import 'package:draw_app/views/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -10,6 +14,16 @@ class Profile extends StatefulWidget {
 
 class ProfileState extends State<Profile> {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+  var userModel;
+  Future<List<UserOrder>>? orders;
+  @override
+  void initState() {
+    super.initState();
+    user = FirebaseAuth.instance.currentUser;
+    userModel = Database().getUser(user!.uid);
+    orders = Cart().getAllUserOrders(user!.uid);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,55 +52,74 @@ class ProfileState extends State<Profile> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: 10, // replace with your list of orders
-        itemBuilder: (context, index) {
-          return Slidable(
-            key: Key(index.toString()),
-            startActionPane: ActionPane(
-              motion: const ScrollMotion(),
-              extentRatio: 0.25,
-              children: [
-                // A SlidableAction can have an icon and/or a label.
-                SlidableAction(
-                  onPressed: (context) {
-                    // try {
-                    //   Database().deleteAppData(userId, document.id);
-                    //   ScaffoldMessenger.of(context)
-                    //       .showSnackBar(MySnackBar(text: 'delete: SUCCESS').get());
-                    // } catch (e) {
-                    //   ScaffoldMessenger.of(context)
-                    //       .showSnackBar(MySnackBar(text: 'delete: FAILED').get());
-                    // }
-                  },
-                  backgroundColor: const Color(0xFFFE4A49),
-                  foregroundColor: Colors.white,
-                  icon: Icons.delete,
-                  label: 'Delete',
-                ),
-              ],
-            ),
-            child: const Card(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'title',
-                        // document.data()['content'],
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+      body: FutureBuilder<List<UserOrder>>(
+        future: orders, // replace with your method
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                UserOrder order = snapshot.data![index];
+                return Slidable(
+                    key: Key(order.id),
+                    startActionPane: ActionPane(
+                      motion: const ScrollMotion(),
+                      extentRatio: 0.25,
+                      children: [
+                        SlidableAction(
+                          onPressed: (context) {
+                            // Add your delete logic here.
+                          },
+                          backgroundColor: const Color(0xFFFE4A49),
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: 'Delete',
+                        ),
+                      ],
+                    ),
+                    child: Expanded(
+                      child: Card(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Order ID: ${order.id}',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Date: ${DateFormat('yyyy-MM-dd').format(order.date)}',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Items: ${order.items.length}',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+                    ));
+              },
+            );
+          } else {
+            return const Center(
+              child: Text('No orders found.'),
+            );
+          }
         },
       ),
     );

@@ -60,7 +60,7 @@ class ProductsPageState extends State<ProductsPage> {
       type: 'newType',
       brand: 'newBrand',
       categoryId: 'Fountain Pen',
-      quantityOnHand: '100',
+      quantityOnHand: 100,
     );
     await Products().createNewProduct(newProduct);
     loadProducts();

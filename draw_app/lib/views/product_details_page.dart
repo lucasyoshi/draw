@@ -152,19 +152,67 @@ class ProductDetailsPageState extends State<ProductDetailsPage> {
                                     user.uid, widget.product, quantity);
                                 if (success) {
                                   // Show a success message
-                                  // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            'Added to cart successfully!')),
+                                  final scaffoldMessenger =
+                                      // ignore: use_build_context_synchronously
+                                      ScaffoldMessenger.of(context);
+                                  scaffoldMessenger.showSnackBar(
+                                    SnackBar(
+                                      content: Row(
+                                        children: <Widget>[
+                                          const Icon(Icons.check,
+                                              color: Colors.green),
+                                          const SizedBox(width: 20.0),
+                                          const Expanded(
+                                            child: Text(
+                                                'Added to cart successfully!'),
+                                          ),
+                                          const SizedBox(width: 20.0),
+                                          GestureDetector(
+                                            onTap: () {
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                            },
+                                            child: Icon(Icons.close,
+                                                // ignore: use_build_context_synchronously
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   );
                                 } else {
                                   // Show an error message
-                                  // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content:
-                                            Text('Failed to add to cart.')),
+                                  final scaffoldMessenger =
+                                      // ignore: use_build_context_synchronously
+                                      ScaffoldMessenger.of(context);
+                                  scaffoldMessenger.showSnackBar(
+                                    SnackBar(
+                                      content: Row(
+                                        children: <Widget>[
+                                          const Icon(Icons.error,
+                                              color: Colors.red),
+                                          const SizedBox(width: 20.0),
+                                          const Expanded(
+                                            child:
+                                                Text('Failed to add to cart!'),
+                                          ),
+                                          const SizedBox(width: 20.0),
+                                          GestureDetector(
+                                            onTap: () {
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                            },
+                                            child: Icon(Icons.close,
+                                                // ignore: use_build_context_synchronously
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   );
                                 }
                               }

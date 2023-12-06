@@ -81,7 +81,7 @@ class Products {
         // If the product does not exist in the cart, add it
         await productRef.set({
           "product": {
-            "productId": product.id,
+            "id": product.id,
             "name": product.name,
             "description": product.description,
             "price": product.price,
@@ -100,6 +100,25 @@ class Products {
       return true;
     } catch (e) {
       print('Database addToCart: catch $e');
+      return false;
+    }
+  }
+
+  Future<bool> removeFromCart(String userId, String productId) async {
+    print('Database removeFromCart: try');
+    print(productId);
+    try {
+      DocumentReference productRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("shopping_cart")
+          .doc(productId);
+
+      await productRef.delete();
+
+      return true;
+    } catch (e) {
+      print('Database removeFromCart: catch $e');
       return false;
     }
   }

@@ -18,7 +18,8 @@ class Database {
       return false;
     }
   }
-    Future<String> getUserName(String userId) async {
+
+  Future<String> getUserName(String userId) async {
     print('Database getUserName: try');
     try {
       DocumentSnapshot documentSnapshot =
@@ -30,6 +31,16 @@ class Database {
       rethrow;
     }
   }
+
+  Future<UserModel> getUser(String userId) async {
+    print('Database getUser: try');
+    try {
+      DocumentSnapshot documentSnapshot =
+          await db.collection("users").doc(userId).get();
+      return UserModel.fromDocumentSnapshot(documentSnapshot: documentSnapshot);
+    } catch (e) {
+      print('Database getUser: catch $e');
+      rethrow;
+    }
+  }
 }
-
-

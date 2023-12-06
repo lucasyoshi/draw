@@ -6,6 +6,8 @@ import 'package:draw_app/views/shopping_cart.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   State<Home> createState() => HomeState();
 }
