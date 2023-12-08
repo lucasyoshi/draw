@@ -117,6 +117,17 @@ class ProductsPageState extends State<ProductsPage> {
                       filter = '1';
                     });
                   },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        return filter == '1'
+                            ? Theme.of(context).colorScheme.onSecondary
+                            : Theme.of(context)
+                                .colorScheme
+                                .secondary; // Use the appropriate color for active state
+                      },
+                    ),
+                  ),
                   child: const Text('Pen'),
                 ),
                 ElevatedButton(
@@ -125,6 +136,17 @@ class ProductsPageState extends State<ProductsPage> {
                       filter = '2';
                     });
                   },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        return filter == '2'
+                            ? Theme.of(context).colorScheme.onSecondary
+                            : Theme.of(context)
+                                .colorScheme
+                                .secondary; // Use the appropriate color for active state
+                      },
+                    ),
+                  ),
                   child: const Text('Pencil'),
                 ),
                 ElevatedButton(
@@ -133,8 +155,19 @@ class ProductsPageState extends State<ProductsPage> {
                       filter = '3';
                     });
                   },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        return filter == '3'
+                            ? Theme.of(context).colorScheme.onSecondary
+                            : Theme.of(context)
+                                .colorScheme
+                                .secondary; // Use the appropriate color for active state
+                      },
+                    ),
+                  ),
                   child: const Text('Notebook'),
-                ), // Add this line
+                ),
                 FloatingActionButton(
                   mini: true, // Set to true for a smaller button
                   onPressed: () {
