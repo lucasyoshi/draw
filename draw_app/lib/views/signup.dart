@@ -40,6 +40,10 @@ class SignUp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Image.asset('assets/img/logo.png', width: 125),
+              const SizedBox(
+                height: 20,
+              ),
               Text(
                 'Sign Up',
                 style: Theme.of(context)

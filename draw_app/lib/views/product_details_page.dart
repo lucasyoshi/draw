@@ -3,6 +3,7 @@ import 'package:draw_app/models/product.dart';
 import 'package:draw_app/services/products.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final Product product;
@@ -72,23 +73,41 @@ class ProductDetailsPageState extends State<ProductDetailsPage> {
                       children: <Widget>[
                         Text(
                           widget.product.name,
-                          style: const TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: GoogleFonts.manrope().fontFamily),
                         ),
                         const SizedBox(height: 20),
                         Text(
                           widget.product.description,
-                          style: const TextStyle(fontSize: 16),
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 20),
-                        Text('Size: ${widget.product.size}'),
-                        Text('Colour: ${widget.product.colour}'),
-                        Text('Type: ${widget.product.type}'),
-                        Text('Brand: ${widget.product.brand}'),
+                        Text(
+                          'Size: ${widget.product.size}',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        Text(
+                          'Colour: ${widget.product.colour}',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        Text(
+                          'Brand: ${widget.product.brand}',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
                         const SizedBox(height: 20),
                       ],
                     ),
                   ),
+                ),
+                Positioned(
+                  bottom: 90, // Increase this value to make room for the price
+                  right: 30,
+                  child: Text(
+                      'Price: \$${widget.product.price.toStringAsFixed(2)}', // Replace this with your price variable
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onSecondary)),
                 ),
                 Positioned(
                   bottom: 30,

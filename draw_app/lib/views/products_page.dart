@@ -205,10 +205,10 @@ class ProductsPageState extends State<ProductsPage> {
           ),
         ],
       ),
-      floatingActionButton: ElevatedButton(
-        onPressed: addProduct,
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: ElevatedButton(
+      //   onPressed: addProduct,
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

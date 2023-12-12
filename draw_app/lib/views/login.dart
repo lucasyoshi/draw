@@ -60,6 +60,10 @@ class Login extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    Image.asset('assets/img/logo.png', width: 125),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       'Log In',
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
